@@ -20,22 +20,22 @@
     <form (ngSubmit)="submitOperation()">
       <div class="mb-3">
         <label for="fromAccount" class="form-label">Cuenta de Retiro</label>
-        <input type="text" id="fromAccount" class="form-control" formControlName="operation.fromAccount" name="fromAccount" required />
+        <input type="text" id="fromAccount" class="form-control" [(ngModel)]="operation.fromAccount" name="fromAccount" required />
       </div>
 
       <div class="mb-3">
         <label for="toAccount" class="form-label">Cuenta Beneficiaria</label>
-        <input type="text" id="toAccount" class="form-control" formControlName="operation.toAccount" name="toAccount" required />
+        <input type="text" id="toAccount" class="form-control" [(ngModel)]="operation.toAccount" name="toAccount" required />
       </div>
 
       <div class="mb-3">
         <label for="balance" class="form-label">Balance</label>
-        <input type="number" id="balance" class="form-control" formControlName="operation.balance" name="balance" required readonly />
+        <input type="number" id="balance" class="form-control" [(ngModel)]="operation.balance" name="balance" required readonly />
       </div>
 
       <div class="mb-3">
         <label for="movementType" class="form-label">Tipo de Movimiento</label>
-        <select id="movementType" class="form-control" formControlName="operation.movementType" name="movementType" required>
+        <select id="movementType" class="form-control" [(ngModel)]="operation.movementType" name="movementType" required>
           <option value="deposit">Depósito</option>
           <option value="withdrawal">Retiro</option>
           <option value="transfer">Transferencia</option>
@@ -44,7 +44,7 @@
 
       <div class="mb-3">
         <label for="amount" class="form-label">Cantidad de Dinero</label>
-        <input type="number" id="amount" class="form-control" formControlName="operation.amount" name="amount" required />
+        <input type="number" id="amount" class="form-control" [(ngModel)]="operation.amount" name="amount" required />
       </div>
 
       <div class="modal-footer">
