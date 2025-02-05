@@ -9,6 +9,7 @@ import { AccountsListComponent } from './accounts-list/accounts-list.component';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { PipesModule } from './pipes/pipes.module';
 import { UiModule } from './ui/ui.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { UiModule } from './ui/ui.module';
     NgbModule,
     PipesModule,
     UiModule,
+    FormsModule,
     NgxWebstorageModule.forRoot()
   ],
   providers: [],
