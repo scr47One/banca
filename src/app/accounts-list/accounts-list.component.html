@@ -3,7 +3,7 @@
 <div class="accounts">
   <div class="balance-sum">
     <span>Saldo total en cuentas</span>
-    <span class="balance">{{ customer.accounts | accountsBalance | currency }} MXN</span>
+    <span class="balance">{{ customer.accounts | accountsBalance | currency:'MXN' }}</span>
   </div>
-  <account-card *ngFor="let account of customer.accounts" [account]="account"></account-card>
+  <account-card class="account-card" *ngFor="let account of customer.accounts" [account]="account" (click)="showDetails(account)"></account-card>
 </div>
