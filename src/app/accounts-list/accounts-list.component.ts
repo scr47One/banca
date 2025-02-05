@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
+import { LocalStorageService } from 'ngx-webstorage';
 import { ICustomer } from '../entities/interfaces';
 
 @Component({
