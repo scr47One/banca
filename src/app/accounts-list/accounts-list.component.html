@@ -3,7 +3,55 @@
 <div class="accounts">
   <div class="balance-sum">
     <span>Saldo total en cuentas</span>
-    <span class="balance">{{ customer.accounts | accountsBalance | currency:'MXN' }}</span>
+    <span class="balance">{{ customer.accounts | accountsBalance | currency}}MXN</span>
   </div>
   <account-card class="account-card" *ngFor="let account of customer.accounts" [account]="account" (click)="showDetails(account)"></account-card>
 </div>
+
+
+<button class="btn btn-outline-primary mb-2 me-2" (click)="openBankOperationModal(bankOperationModal)">Realizar Operación</button>
+
+<ng-template #bankOperationModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">Operación Bancaria</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+  <div class="modal-body">
+    <form (ngSubmit)="submitOperation()">
+      <div class="mb-3">
+        <label for="fromAccount" class="form-label">Cuenta de Retiro</label>
+        <input type="text" id="fromAccount" class="form-control" formControlName="operation.fromAccount" name="fromAccount" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="toAccount" class="form-label">Cuenta Beneficiaria</label>
+        <input type="text" id="toAccount" class="form-control" formControlName="operation.toAccount" name="toAccount" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="balance" class="form-label">Balance</label>
+        <input type="number" id="balance" class="form-control" formControlName="operation.balance" name="balance" required readonly />
+      </div>
+
+      <div class="mb-3">
+        <label for="movementType" class="form-label">Tipo de Movimiento</label>
+        <select id="movementType" class="form-control" formControlName="operation.movementType" name="movementType" required>
+          <option value="deposit">Depósito</option>
+          <option value="withdrawal">Retiro</option>
+          <option value="transfer">Transferencia</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="amount" class="form-label">Cantidad de Dinero</label>
+        <input type="number" id="amount" class="form-control" formControlName="operation.amount" name="amount" required />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Realizar operación</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+

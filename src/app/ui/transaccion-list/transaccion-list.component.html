@@ -1,0 +1,16 @@
+
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let transaction of transactions" >
+        <div class="row">
+            <div class="col-4">
+            <span>{{ transaction.transactionDate| date: 'dd/MM/yyyy' }}</span>
+            </div>
+            <div class="col-4">
+            <span>{{ transaction.transactionType }}</span>
+            </div>
+            <div class="col-4">
+            <span>{{ transaction.amount | currency:'MXN' }}</span>
+            </div>
+        </div>
+    </li>
+</ul>
