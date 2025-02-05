@@ -1,0 +1,18 @@
+.accounts {
+  .balance-sum {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: 20px;
+
+    .balance {
+      font-weight: 800;
+    }
+  }
+
+  ul {
+    list-style: none;
+    width: 100%;
+
+  }
+}
