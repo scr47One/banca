@@ -10,7 +10,7 @@ export class AccountManagerService {
 
   constructor() { }
 
-  public addTrasaction(account: IAccount, amount: number, transactionType: TranscationType): Observable<IAccount> {
+  public addTransaction(account: IAccount, amount: number, transactionType: TranscationType): Observable<IAccount> {
     return new Observable(observer => {
       if (transactionType === TranscationType.DEPOSIT) {
         account.balance += amount;
