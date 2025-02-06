@@ -67,27 +67,27 @@
   <div class="modal-body">
     <p><strong>Account: </strong>{{ selectedAccount?.accountName }}</p>
     <p><strong>Balance: </strong>{{ selectedAccount?.balance | currency:'MXN' }}</p>
-    <div class="accordion accordion-flush" id="accordionTransaction">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse"
-            aria-expanded="false" aria-controls="collapse">
-            Transacciones
-          </button>
-        </h2>
-        <div id="collapse" class="accordion-collapse collapse show" data-bs-parent="#accordionTransaction">
-          <div class="accordion-body overflow-y-auto">
-            <span>
-              <div
-                *ngIf="!selectedAccount?.transactions || selectedAccount?.transactions!.length <= 0; else transactionList">
-                <p>No hay transacciones</p>
+    <div ngbAccordion id="accordionTransaction">
+      <div ngbAccordionItem="">
+          <h2 ngbAccordionHeader>
+              <button ngbAccordionButton type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse">
+              Transacciones
+              </button>
+          </h2>
+          <div id="collapse" ngbAccordionCollapse data-bs-parent="#accordionTransaction">
+              <div ngbAccordionBody class="overflow-y-auto">
+                <span>
+                  <div *ngIf="!selectedAccount?.transactions || selectedAccount?.transactions!.length <= 0; then noTransactionList; else transactionList">
+                  </div>
+                  <ng-template #noTransactionList>
+                    <p>No hay transacciones</p>
+                  </ng-template>
+                    <ng-template #transactionList>
+                        <transaction-list [transactions]="selectedAccount?.transactions"></transaction-list>
+                    </ng-template>
+                </span>
               </div>
-              <ng-template #transactionList>
-                <transaction-list [transactions]="selectedAccount?.transactions"></transaction-list>
-              </ng-template>
-            </span>
           </div>
-        </div>
       </div>
     </div>
   </div>
