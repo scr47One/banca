@@ -1,4 +1,4 @@
-import { Component, ViewChild, inject, TemplateRef} from '@angular/core';
+import { Component, ViewChild, inject, TemplateRef } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
 import { IAccount, ICustomer } from '../entities/interfaces';
 import { AccountManagerService } from '../services/account-manager.service';
@@ -30,12 +30,12 @@ export class AccountsListComponent {
   openBankOperationModal(content: TemplateRef<any>) {
 
     //this.AccountManagerService.addTransaction(this.selectedAccount, 200, );
-    
+
     this.operation = {
       fromAccount: '', //aquí se podría utilizar el selectedAccount para hacer la transferencia
       toAccount: '',
       balance: 0,
-      movementType:  TranscationType.DEPOSIT,
+      movementType: TranscationType.DEPOSIT,
       amount: 0,
     };
     this.modalService.open(content, { size: 'lg' });
@@ -44,8 +44,8 @@ export class AccountsListComponent {
   submitOperation() {
     console.log('Operación:', this.operation);
 
-    
-    
+
+
     this.operation = {
       fromAccount: '',
       toAccount: '',

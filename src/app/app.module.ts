@@ -10,13 +10,15 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
 import { PipesModule } from './pipes/pipes.module';
 import { UiModule } from './ui/ui.module';
 import { FormsModule } from '@angular/forms';
+import { MovementsComponent } from './movements/movements.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AccountComponent,
-    AccountsListComponent
+    AccountsListComponent,
+    MovementsComponent
   ],
   imports: [
     BrowserModule,
