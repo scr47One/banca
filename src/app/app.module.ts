@@ -11,6 +11,7 @@ import { PipesModule } from './pipes/pipes.module';
 import { UiModule } from './ui/ui.module';
 import { FormsModule } from '@angular/forms';
 import { MovementsComponent } from './movements/movements.component';
+import { InvestComponent } from './invest/invest.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { MovementsComponent } from './movements/movements.component';
     AppComponent,
     AccountComponent,
     AccountsListComponent,
-    MovementsComponent
+    MovementsComponent,
+    InvestComponent
   ],
   imports: [
     BrowserModule,

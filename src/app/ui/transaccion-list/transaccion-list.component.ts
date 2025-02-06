@@ -1,4 +1,5 @@
 import { Component , Input } from '@angular/core';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { ITransaction } from "src/app/entities/interfaces";
 
 @Component({

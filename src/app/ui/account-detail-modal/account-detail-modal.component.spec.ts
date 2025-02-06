@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AccDetailModalComponent } from './acc-detail-modal.component';
+import { AccountDetailModalComponent } from './account-detail-modal.component';
 
 describe('AccDetailModalComponent', () => {
-  let component: AccDetailModalComponent;
-  let fixture: ComponentFixture<AccDetailModalComponent>;
+  let component: AccountDetailModalComponent;
+  let fixture: ComponentFixture<AccountDetailModalComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AccDetailModalComponent]
+      declarations: [AccountDetailModalComponent]
     });
-    fixture = TestBed.createComponent(AccDetailModalComponent);
+    fixture = TestBed.createComponent(AccountDetailModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
