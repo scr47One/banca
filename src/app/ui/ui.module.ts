@@ -16,7 +16,8 @@ import { TransaccionListComponent } from './transaccion-list/transaccion-list.co
     CommonModule
   ],
   exports: [
-    AccountCardComponent
+    AccountCardComponent,
+    TransaccionListComponent
   ]
 })
 export class UiModule { }

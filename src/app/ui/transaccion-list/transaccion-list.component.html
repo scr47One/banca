@@ -1,15 +1,18 @@
 
-<ul class="list-group">
+<ul class="list-group list-group-flush p-0">
     <li class="list-group-item" *ngFor="let transaction of transactions" >
         <div class="row">
-            <div class="col-4">
-            <span>{{ transaction.transactionDate| date: 'dd/MM/yyyy' }}</span>
+            <div class="col-1">
+                <span>{{ transaction.transactionId }}</span>
             </div>
-            <div class="col-4">
-            <span>{{ transaction.transactionType }}</span>
+            <div class="col-3 fst-italic text-secondary">
+                <span>{{ transaction.transactionDate | date: 'dd/MM/yy' }}</span>
             </div>
-            <div class="col-4">
-            <span>{{ transaction.amount | currency:'MXN' }}</span>
+            <div class="col-4 text-uppercase">
+                <span>{{ transaction.transactionType }}</span>
+            </div>
+            <div class="col-4 fw-bold">
+                <span>{{ transaction.amount | currency:'MXN' }}</span>
             </div>
         </div>
     </li>
