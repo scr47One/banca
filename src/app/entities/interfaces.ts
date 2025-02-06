@@ -6,6 +6,7 @@ export interface ICustomer {
   customerId: string;
   email: string;
   accounts: IAccount[];
+  investments: IInvest[];
 }
 
 export interface IAccount {
@@ -22,4 +23,11 @@ export interface ITransaction {
   amount: number;
   transactionDate: Date;
   transactionType: TranscationType;
+}
+
+export interface IInvest {
+  investmentId: string;
+  balance: number;
+  transactions: ITransaction[];
+  investRate: number;
 }
