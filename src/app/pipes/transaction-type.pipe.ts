@@ -1,17 +1,17 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TranscationType } from '../entities/enums';
+import { TransactionType } from '../entities/enums';
 @Pipe({
   name: 'transactionType'
 })
 export class TransactionTypePipe implements PipeTransform {
 
-  transform(value: TranscationType): string {
+  transform(value: TransactionType): string {
     switch (value) {
-      case TranscationType.DEPOSIT:
+      case TransactionType.DEPOSIT:
         return 'Depósito';
-      case TranscationType.WITHDRAW:
+      case TransactionType.WITHDRAW:
         return 'Retiro';
-      case TranscationType.TRANSFER:
+      case TransactionType.TRANSFER:
         return 'Transferencia';
       default:
         return 'Desconocido';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TranscationType } from '../entities/enums';
+import { TransactionType } from '../entities/enums';
 import { IAccount } from '../entities/interfaces';
 
 @Injectable({
@@ -10,18 +10,18 @@ export class AccountManagerService {
 
   constructor() { }
 
-  public addTransaction(account: IAccount, amount: number, transactionType: TranscationType): Observable<IAccount> {
+  public addTransaction(account: IAccount, amount: number, transactionType: TransactionType): Observable<IAccount> {
     return new Observable(observer => {
-      if (transactionType === TranscationType.DEPOSIT) {
+      if (transactionType === TransactionType.DEPOSIT) {
         account.balance += amount;
-      } else if (transactionType === TranscationType.WITHDRAW) {
+      } else if (transactionType === TransactionType.WITHDRAW) {
         if (account.balance >= amount) {
           account.balance -= amount;
         } else {
           observer.error('Insufficient funds');
           return;
         }
-      } else if (transactionType === TranscationType.TRANSFER) {
+      } else if (transactionType === TransactionType.TRANSFER) {
         if (account.balance >= amount) {
           account.balance -= amount;
         } else {

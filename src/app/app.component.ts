@@ -9,9 +9,11 @@ import Customer from 'src/assets/json/customer.json';
 export class AppComponent implements OnInit {
   title = 'banca';
   customer = Customer;
+  isMenuCollapsed = true;
   constructor(private storage: LocalStorageService) { }
 
   ngOnInit(): void {
+    this.customer = this.storage.retrieve('customer') || this.customer;
     this.storage.store('customer', this.customer);
   }
 }

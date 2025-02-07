@@ -7,6 +7,9 @@ import { TransactionModalComponent } from './transaction-modal/transaction-modal
 import { PipesModule } from '../pipes/pipes.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { InvestCardComponent } from './invest-card/invest-card.component';
+import { CustomerDataComponent } from './customer-data/customer-data.component';
+import { InvestmentModalComponent } from './investment-modal/investment-modal.component';
 
 
 
@@ -15,7 +18,10 @@ import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
     AccountCardComponent,
     AccountDetailModalComponent,
     TransaccionListComponent,
-    TransactionModalComponent
+    TransactionModalComponent,
+    InvestCardComponent,
+    CustomerDataComponent,
+    InvestmentModalComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +32,8 @@ import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   exports: [
     AccountCardComponent,
-    TransaccionListComponent
+    TransaccionListComponent,
+    InvestCardComponent
   ]
 })
 export class UiModule { }

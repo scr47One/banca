@@ -18,5 +18,14 @@
       "balance": 25000,
       "transactions": []
     }
+  ],
+  "investments": [
+    {
+      "investmentId": "123456",
+      "investmentName": "Inversión a plazo",
+      "balance": 100000,
+      "investRate": 0.05,
+      "transactions": []
+    }
   ]
 }

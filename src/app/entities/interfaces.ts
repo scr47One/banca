@@ -1,4 +1,4 @@
-import { TranscationType } from "./enums";
+import { TransactionType } from "./enums";
 
 export interface ICustomer {
   name: string;
@@ -22,12 +22,13 @@ export interface ITransaction {
   accountId: string;
   amount: number;
   transactionDate: Date;
-  transactionType: TranscationType;
+  transactionType: TransactionType;
 }
 
 export interface IInvest {
   investmentId: string;
   balance: number;
+  investmentName: string;
   transactions: ITransaction[];
   investRate: number;
 }

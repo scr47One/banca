@@ -1,0 +1,14 @@
+<h1>Hola {{ customer.name}}</h1>
+<p>{{ customer | customerName }}</p>
+<div class="investments">
+  <div class="balance-sum">
+    <span>Saldo total en inversiones</span>
+    <div>
+      <span class="balance">{{ customer.investments | investmentsBalance | currency: 'MXN'}}</span>
+      <button class="btn btn-success ms-4" (click)="openInvestmentModal()">Nueva operación</button>
+    </div>
+  </div>
+  <div class="mt-2">
+    <invest-card [invest]="invest" *ngFor="let invest of customer.investments" ></invest-card>
+  </div>
+</div>

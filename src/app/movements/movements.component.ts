@@ -16,7 +16,7 @@ export class MovementsComponent implements OnInit {
   accounts: IAccount[] = [];
   selectedAccount?: IAccount;
 
-  constructor(private accountService: AccountManagerService, private storage: LocalStorageService, private modalService: NgbModal) { }
+  constructor(private storage: LocalStorageService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.accounts = this.customer.accounts;

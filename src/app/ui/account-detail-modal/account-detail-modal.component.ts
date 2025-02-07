@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { LocalStorageService } from 'ngx-webstorage';
 import { IAccount } from 'src/app/entities/interfaces';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 

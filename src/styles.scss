@@ -3,6 +3,7 @@
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 
 * {
   font-family: "Roboto", serif;
@@ -13,4 +14,10 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;
+}
+
+svg {
+  width: 1rem;
+  height: 1rem;
+  font-weight: bolder;
 }
