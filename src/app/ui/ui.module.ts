@@ -6,10 +6,12 @@ import { TransaccionListComponent } from './transaccion-list/transaccion-list.co
 import { TransactionModalComponent } from './transaction-modal/transaction-modal.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { InvestCardComponent } from './invest-card/invest-card.component';
 import { CustomerDataComponent } from './customer-data/customer-data.component';
 import { InvestmentModalComponent } from './investment-modal/investment-modal.component';
+import { InvestmentModalAddComponent } from './investment-modal-add/investment-modal-add.component';
+import { AlertComponent } from './alert/alert.component';
 
 
 
@@ -21,14 +23,17 @@ import { InvestmentModalComponent } from './investment-modal/investment-modal.co
     TransactionModalComponent,
     InvestCardComponent,
     CustomerDataComponent,
-    InvestmentModalComponent
+    InvestmentModalComponent,
+    InvestmentModalAddComponent,
+    AlertComponent
   ],
   imports: [
     CommonModule,
     PipesModule,
     ReactiveFormsModule,
     FormsModule,
-    NgbAccordionModule
+    NgbAccordionModule,
+    NgbAlertModule
   ],
   exports: [
     AccountCardComponent,

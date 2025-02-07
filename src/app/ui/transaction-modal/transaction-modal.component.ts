@@ -2,9 +2,9 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IAccount, ICustomer } from '../../entities/interfaces';
-import { AccountManagerService } from 'src/app/services/account-manager.service';
+import { AccountManagerService } from 'src/app/services/local/account-manager.service';
 import { TransactionType } from 'src/app/entities/enums';
-import { LocalStorageCustomerDataService } from 'src/app/services/local-storage-customer-data.service';
+import { LocalStorageCustomerDataService } from 'src/app/services/local/local-storage-customer-data.service';
 
 @Component({
   selector: 'app-transaction-modal',

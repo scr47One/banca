@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
-import { ICustomer } from '../entities/interfaces';
+import { ICustomer } from '../../entities/interfaces';
 
 @Injectable({
   providedIn: 'root'

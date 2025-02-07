@@ -1,4 +1,4 @@
-<nav class="navbar nav-tabs navbar-expand-lg bg-body-tertiary">
+<nav ngbNav class="navbar nav-tabs navbar-expand-lg bg-body-tertiary my-0 pb-0">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Banca por internet</a>
     <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -6,15 +6,15 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="/accounts-list">Cuentas</a>
+      <ul class="navbar-nav me-auto mb-lg-0">
+        <li ngbNavItem class="nav-item">
+          <a ngbNavLink class="nav-link" aria-current="page" routerLink="/accounts-list">Cuentas</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/movements">Movimientos</a>
+        <li ngbNavItem class="nav-item">
+          <a ngbNavLink class="nav-link" routerLink="/movements">Movimientos</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/investments-list">Inversiones</a>
+        <li ngbNavItem="" class="nav-item">
+          <a ngbNavLink class="nav-link" routerLink="/investments-list">Inversiones</a>
         </li>
       </ul>
     </div>

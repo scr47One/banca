@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ICustomer, IInvest } from '../entities/interfaces';
+import { ICurrency, ICustomer, IInvest } from '../entities/interfaces';
 import { LocalStorageService } from 'ngx-webstorage';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { InvestmentManagerService } from '../services/investment-manager.service';
+import { InvestmentManagerService } from '../services/local/investment-manager.service';
 import { TransactionType } from '../entities/enums';
 import { InvestmentModalComponent } from '../ui/investment-modal/investment-modal.component';
+import { InvestmentModalAddComponent } from '../ui/investment-modal-add/investment-modal-add.component';
+import { CurrencyExchangeManagerService } from '../services/local/currency-exchange-manager.service';
 
 
 @Component({
@@ -14,21 +16,25 @@ import { InvestmentModalComponent } from '../ui/investment-modal/investment-moda
 })
 export class InvestmentsListComponent implements OnInit {
   customer: ICustomer = this.storage.retrieve('customer');
+  currencies: ICurrency[] = this.storage.retrieve('currencies');
 
-  constructor(private storage: LocalStorageService, private investmentService: InvestmentManagerService, private modalService: NgbModal) { }
+  constructor(
+    private storage: LocalStorageService,
+    private investmentService: InvestmentManagerService,
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.startInvestmentTimer();
   }
 
   calcInvestmentProfit(investment: IInvest) {
-    return investment.balance * investment.investRate;
+    return investment.balance * investment.investRate.rate;
   }
 
   startInvestmentTimer() {
     setInterval(() => {
       this.customer.investments.forEach(investment => {
-        this.investmentService.addTransaction(investment, this.calcInvestmentProfit(investment), investment.investmentId, TransactionType.DEPOSIT).subscribe({
+        this.investmentService.addTransaction(investment, this.calcInvestmentProfit(investment), investment.accountId, TransactionType.DEPOSIT).subscribe({
           next: (inv) => {
             investment = inv;
           },
@@ -44,5 +50,11 @@ export class InvestmentsListComponent implements OnInit {
   openInvestmentModal() {
     const modalRef = this.modalService.open(InvestmentModalComponent);
     modalRef.componentInstance.customer = this.customer;
+  }
+
+  openInvestmentModalAdd() {
+    const modalRef = this.modalService.open(InvestmentModalAddComponent);
+    modalRef.componentInstance.customer = this.customer
+    modalRef.componentInstance.currencies = this.currencies;
   }
 }

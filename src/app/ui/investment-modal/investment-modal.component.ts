@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TransactionType } from 'src/app/entities/enums';
 import { IAccount, ICustomer, IInvest } from 'src/app/entities/interfaces';
-import { AccountManagerService } from 'src/app/services/account-manager.service';
-import { InvestmentManagerService } from 'src/app/services/investment-manager.service';
-import { LocalStorageCustomerDataService } from 'src/app/services/local-storage-customer-data.service';
+import { AccountManagerService } from 'src/app/services/local/account-manager.service';
+import { InvestmentManagerService } from 'src/app/services/local/investment-manager.service';
+import { LocalStorageCustomerDataService } from 'src/app/services/local/local-storage-customer-data.service';
 
 @Component({
   selector: 'app-investment-modal',
@@ -36,7 +36,7 @@ export class InvestmentModalComponent {
 
     this.investService.addTransaction(toAccount, amount, fromAccount.accountId, operationType).subscribe({
       next: (fam) => {
-        this.accountService.addTransaction(fromAccount, amount, toAccount.investmentId, operationTypeAccount).subscribe({
+        this.accountService.addTransaction(fromAccount, amount, toAccount.accountId, operationTypeAccount).subscribe({
           next: (tam) => {
             this.updateCustomer(tam, fam);
             this.activeModal.dismiss();
@@ -54,6 +54,6 @@ export class InvestmentModalComponent {
 
   updateCustomer(account: IAccount, invest: IInvest) {
     this.customer!.accounts[this.customer!.accounts.findIndex(i => i.accountId === account.accountId)] = account;
-    this.customer!.investments[this.customer!.investments.findIndex(i => i.investmentId === invest.investmentId)] = invest;
+    this.customer!.investments[this.customer!.investments.findIndex(i => i.accountId === invest.accountId)] = invest;
   }
 }

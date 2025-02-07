@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TransactionType } from '../entities/enums';
-import { IAccount } from '../entities/interfaces';
+import { TransactionType } from '../../entities/enums';
+import { IAccount } from '../../entities/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,7 @@ export class AccountManagerService {
         accountId: account.accountId,
         fromAccountId,
         amount: amount,
+        currency: account.currency,
         transactionDate: new Date(),
         transactionType: transactionType
       });

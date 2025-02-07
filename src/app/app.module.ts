@@ -11,6 +11,7 @@ import { UiModule } from './ui/ui.module';
 import { FormsModule } from '@angular/forms';
 import { MovementsComponent } from './movements/movements.component';
 import { InvestmentsListComponent } from './investments-list/investments-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { InvestmentsListComponent } from './investments-list/investments-list.co
     PipesModule,
     UiModule,
     FormsModule,
+    HttpClientModule,
     NgxWebstorageModule.forRoot()
   ],
   providers: [],

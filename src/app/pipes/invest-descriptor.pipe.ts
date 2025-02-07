@@ -6,8 +6,8 @@ import { IInvest } from '../entities/interfaces';
 })
 export class InvestDescriptorPipe implements PipeTransform {
 
-  transform(invest: IInvest): unknown {
-    return `${invest.investmentId} ${invest.investmentName}`;
+  transform(invest: IInvest): string{
+    return `${invest.accountId} ${invest.accountName}`;
   }
 
 }

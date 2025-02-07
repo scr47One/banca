@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountManagerService } from '../services/account-manager.service';
+import { AccountManagerService } from '../services/local/account-manager.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { IAccount, ICustomer } from '../entities/interfaces';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

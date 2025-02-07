@@ -8,6 +8,7 @@
       "accountId": "569856",
       "customerId": "1225235",
       "accountName": "Cuenta de ahorros",
+      "currency": "MXN",
       "balance": 50000,
       "transactions": []
     },
@@ -15,16 +16,32 @@
       "accountId": "784596",
       "customerId": "1225235",
       "accountName": "Cuenta Nomina",
+      "currency": "MXN",
       "balance": 25000,
       "transactions": []
     }
   ],
   "investments": [
     {
-      "investmentId": "123456",
-      "investmentName": "Inversión a plazo",
+      "accountId": "123456",
+      "accountName": "Inversión a plazo",
+      "currency": "MXN",
       "balance": 100000,
-      "investRate": 0.05,
+      "investRate": {
+        "rate": 0.05,
+        "term": "1"
+      },
+      "transactions": []
+    },
+    {
+      "accountId": "789456",
+      "accountName": "Inversión a plazo",
+      "currency": "EUR",
+      "balance": 50000,
+      "investRate": {
+        "rate": 0.03,
+        "term": "1"
+      },
       "transactions": []
     }
   ]

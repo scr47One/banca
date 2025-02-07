@@ -9,6 +9,8 @@ import { InvestmentsBalancePipe } from './investments-balance.pipe';
 import { InvestRatePipe } from './invest-rate.pipe';
 import { InvestDescriptorPipe } from './invest-descriptor.pipe';
 import { TransactionDescriptionPipe } from './transaction-description.pipe';
+import { CurrencyDescriptionPipe } from './currency-description.pipe';
+import { RateDescriptionPipe } from './rate-description.pipe';
 
 
 
@@ -22,7 +24,9 @@ import { TransactionDescriptionPipe } from './transaction-description.pipe';
     InvestmentsBalancePipe,
     InvestRatePipe,
     InvestDescriptorPipe,
-    TransactionDescriptionPipe
+    TransactionDescriptionPipe,
+    CurrencyDescriptionPipe,
+    RateDescriptionPipe
   ],
   imports: [
     CommonModule
@@ -35,7 +39,9 @@ import { TransactionDescriptionPipe } from './transaction-description.pipe';
     InvestmentsBalancePipe,
     InvestRatePipe,
     InvestDescriptorPipe,
-    TransactionDescriptionPipe
+    TransactionDescriptionPipe,
+    CurrencyDescriptionPipe,
+    RateDescriptionPipe
   ]
 })
 export class PipesModule { }

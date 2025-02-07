@@ -14,7 +14,22 @@ export interface IAccount {
   customerId: string;
   accountName: string;
   balance: number;
+  currency: string;
   transactions: ITransaction[];
+}
+
+export interface IInvest extends IAccount {
+  investRate: IInvestRate
+}
+
+export interface ICurrency {
+  code: string;
+  name: string;
+}
+
+export interface IInvestRate {
+  term: string;
+  rate: number;
 }
 
 export interface ITransaction {
@@ -22,14 +37,7 @@ export interface ITransaction {
   accountId: string;
   fromAccountId: string;
   amount: number;
+  currency: string;
   transactionDate: Date;
   transactionType: TransactionType;
-}
-
-export interface IInvest {
-  investmentId: string;
-  balance: number;
-  investmentName: string;
-  transactions: ITransaction[];
-  investRate: number;
 }

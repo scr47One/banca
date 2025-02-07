@@ -4,23 +4,14 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="form">
+    <div class="form-check mb-3">
+      <input type="radio" name="deposit" id="depositBtn" class="form-check-input" formControlName="operationType" value="deposit">
+      <label class="form-check-label" for="depositBtn">Depositar a inversión</label>
+    </div>
 
-    <div class="mb-3">
-      <label for="operationType" class="form-label">Tipo de operación</label>
-      <div id="operationType" class="btn-group" role="group" aria-label="Tipo de operación">
-        <input type="radio" name="depositBtn" id="depositBtn" class="btn-check">
-        <label class="btn btn-outline-primary" for="depositBtn" (click)="form.get('operationType')?.setValue('deposit')">
-          Añadir
-          <i class="bi bi-plus"></i>
-          <i class="bi bi-cash"></i>
-        </label>
-        <input type="radio" name="withdrawBtn" id="withdrawBtn" class="btn-check">
-        <label for="withdrawBtn" class="btn btn-outline-secondary" (click)="form.get('operationType')?.setValue('withdraw')">
-          Retirar
-          <i class="bi bi-dash"></i>
-          <i class="bi bi-cash"></i>
-        </label>
-      </div>
+    <div class="form-check mb-3">
+      <input type="radio" name="withdraw" id="withdrawBtn" class="form-check-input" formControlName="operationType" value="withdraw">
+      <label class="form-check-label" for="withdrawBtn">Retirar de inversión</label>
     </div>
 
     <div class="mb-3">
@@ -28,7 +19,7 @@
       <select class="form-control" formControlName="fromAccount">
         <option>Seleccione una cuenta corriente</option>
         <option *ngFor="let account of customer?.accounts" [ngValue]="account">
-          {{ account | accountDescriptor }} {{ account.balance | currency:'MXN' }}
+          {{ account | accountDescriptor }} {{ account.balance | currency: account.currency }}
         </option>
       </select>
     </div>
@@ -38,7 +29,7 @@
       <select class="form-control" formControlName="toAccount">
         <option>Seleccione una cuenta de inversión</option>
         <option *ngFor="let invest of customer?.investments" [ngValue]="invest">
-          {{ invest | investDescriptor }} {{ invest.balance | currency:'MXN' }} {{invest.investRate | investRate }}
+          {{ invest | investDescriptor }} {{ invest.balance | currency: invest.currency }} {{invest.investRate | investRate }}
         </option>
       </select>
     </div>
