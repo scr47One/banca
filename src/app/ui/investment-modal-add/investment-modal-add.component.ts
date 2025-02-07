@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
 import { TransactionType } from 'src/app/entities/enums';
 import { ICustomer, IAccount, IInvest, ICurrency, IInvestRate } from 'src/app/entities/interfaces';
 import { AccountManagerService } from 'src/app/services/local/account-manager.service';
@@ -43,8 +42,8 @@ export class InvestmentModalAddComponent {
       private accountService: AccountManagerService,
       private investService: InvestmentManagerService,
       private customerService: CustomerManagerService,
+      private currencyExchangeService: CurrencyExchangeManagerService,
       private localStorageCustomer: LocalStorageCustomerDataService,
-      private currencyExchangeService: CurrencyExchangeManagerService
     ) { }
 
     onAccountChange() {
@@ -69,6 +68,7 @@ export class InvestmentModalAddComponent {
           next: (convertedAmount) => {
             amountConverted = convertedAmount;
             this.addInvestment(investName, toCurrency, investRate, fromAccount,  amountConverted, amount );
+            this.activeModal.dismiss();
           },
           error: (error) => {
             this.showAlert(error, 'danger');

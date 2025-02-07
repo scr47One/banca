@@ -8,4 +8,6 @@ import { Component, Input } from '@angular/core';
 export class AlertComponent {
   @Input('message') message: string = '';
   @Input('type') type: string = 'info';
+
+  constructor() {}
 }

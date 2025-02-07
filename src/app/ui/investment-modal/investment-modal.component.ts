@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TransactionType } from 'src/app/entities/enums';
 import { IAccount, ICustomer, IInvest } from 'src/app/entities/interfaces';
 import { AccountManagerService } from 'src/app/services/local/account-manager.service';
+import { CurrencyExchangeManagerService } from 'src/app/services/local/currency-exchange-manager.service';
 import { InvestmentManagerService } from 'src/app/services/local/investment-manager.service';
 import { LocalStorageCustomerDataService } from 'src/app/services/local/local-storage-customer-data.service';
 
@@ -25,7 +26,13 @@ export class InvestmentModalComponent {
     amount: [undefined, Validators.required]
   });
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private investService: InvestmentManagerService, private accountService: AccountManagerService) { }
+  constructor(
+    public activeModal: NgbActiveModal,
+    private formBuilder: FormBuilder,
+    private investService: InvestmentManagerService,
+    private localStorageCustomer: LocalStorageCustomerDataService,
+    private currencyExchangeService: CurrencyExchangeManagerService,
+    private accountService: AccountManagerService) { }
 
   submitOperation() {
     const fromAccount = this.form.get('fromAccount')?.value as IAccount;
@@ -34,9 +41,32 @@ export class InvestmentModalComponent {
     const operationType = this.form.get('operationType')?.value as TransactionType;
     const operationTypeAccount = operationType === TransactionType.DEPOSIT ? TransactionType.WITHDRAW : TransactionType.DEPOSIT;
 
-    this.investService.addTransaction(toAccount, amount, fromAccount.accountId, operationType).subscribe({
+    const fromCurrency = fromAccount.currency;
+    const toCurrency = toAccount.currency;
+
+    let amountConverted = amount;
+
+    if (fromCurrency !== toCurrency) {
+      this.currencyExchangeService.convertCurrencyAmount( amount, fromCurrency, toCurrency ).subscribe({
+        next: (convertedAmount) => {
+          amountConverted = convertedAmount;
+          this.addTransaction(toAccount, fromAccount, operationType, operationTypeAccount, amount, amountConverted);
+          this.activeModal.dismiss();
+        },
+        error: (error) => {
+          alert(error);
+        }
+      });
+    } else {
+      this.addTransaction(toAccount, fromAccount, operationType, operationTypeAccount, amount, amount);
+      this.activeModal.dismiss();
+    }
+  }
+
+  addTransaction(toAccount: IInvest, fromAccount: IAccount , operationType: TransactionType, operationTypeAccount: TransactionType, amount: number, amountConverted: number) {
+    this.investService.addTransaction(toAccount, amountConverted, fromAccount.accountId, operationType).subscribe({
       next: (fam) => {
-        this.accountService.addTransaction(fromAccount, amount, toAccount.accountId, operationTypeAccount).subscribe({
+        this.accountService.addTransaction(fromAccount, amount, toAccount.accountId , operationTypeAccount).subscribe({
           next: (tam) => {
             this.updateCustomer(tam, fam);
             this.activeModal.dismiss();
@@ -55,5 +85,6 @@ export class InvestmentModalComponent {
   updateCustomer(account: IAccount, invest: IInvest) {
     this.customer!.accounts[this.customer!.accounts.findIndex(i => i.accountId === account.accountId)] = account;
     this.customer!.investments[this.customer!.investments.findIndex(i => i.accountId === invest.accountId)] = invest;
+    this.localStorageCustomer.setCustomer(this.customer!);
   }
 }
