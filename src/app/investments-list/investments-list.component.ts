@@ -28,7 +28,7 @@ export class InvestmentsListComponent implements OnInit {
   startInvestmentTimer() {
     setInterval(() => {
       this.customer.investments.forEach(investment => {
-        this.investmentService.addTransaction(investment, this.calcInvestmentProfit(investment), TransactionType.DEPOSIT).subscribe({
+        this.investmentService.addTransaction(investment, this.calcInvestmentProfit(investment), investment.investmentId, TransactionType.DEPOSIT).subscribe({
           next: (inv) => {
             investment = inv;
           },

@@ -2,10 +2,12 @@
   <h5 class="modal-title">Detalles de la cuenta</h5>
 </div>
 <div class="modal-body">
-  <p><strong>Account: </strong>{{ account?.accountName }}</p>
-  <p><strong>Balance: </strong>{{ account?.balance | currency:'MXN' }}</p>
+  <h4>{{ account?.accountName }}</h4>
+  <h6 class="text-secondary"><strong>No: </strong>{{ account?.accountId }}</h6>
+  <p>Saldo actual: <span class="fw-bolder">{{ account?.balance | currency:'MXN' }}</span></p>
   <transaction-list [transactions]="account?.transactions"></transaction-list>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="activeModal.close()">Cerrar</button>
 </div>
+

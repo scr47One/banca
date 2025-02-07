@@ -28,15 +28,15 @@ export class InvestmentModalComponent {
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private investService: InvestmentManagerService, private accountService: AccountManagerService) { }
 
   submitOperation() {
-    const fromAccount = this.form.get('fromAccount')?.value;
-    const toAccount = this.form.get('toAccount')?.value;
-    const amount = this.form.get('amount')?.value;
-    const operationType = this.form.get('operationType')?.value;
+    const fromAccount = this.form.get('fromAccount')?.value as IAccount;
+    const toAccount = this.form.get('toAccount')?.value as IInvest;
+    const amount = this.form.get('amount')?.value as number;
+    const operationType = this.form.get('operationType')?.value as TransactionType;
     const operationTypeAccount = operationType === TransactionType.DEPOSIT ? TransactionType.WITHDRAW : TransactionType.DEPOSIT;
 
-    this.investService.addTransaction(toAccount, amount, operationType).subscribe({
+    this.investService.addTransaction(toAccount, amount, fromAccount.accountId, operationType).subscribe({
       next: (fam) => {
-        this.accountService.addTransaction(fromAccount, amount, operationTypeAccount).subscribe({
+        this.accountService.addTransaction(fromAccount, amount, toAccount.investmentId, operationTypeAccount).subscribe({
           next: (tam) => {
             this.updateCustomer(tam, fam);
             this.activeModal.dismiss();

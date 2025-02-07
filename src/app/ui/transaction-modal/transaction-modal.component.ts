@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ICustomer } from '../../entities/interfaces';
+import { IAccount, ICustomer } from '../../entities/interfaces';
 import { AccountManagerService } from 'src/app/services/account-manager.service';
 import { TransactionType } from 'src/app/entities/enums';
 import { LocalStorageCustomerDataService } from 'src/app/services/local-storage-customer-data.service';
@@ -24,13 +24,13 @@ export class TransactionModalComponent {
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private accountService: AccountManagerService, private lsCustomer: LocalStorageCustomerDataService) { }
 
   submitOperation() {
-    const fromAccount = this.form.get('fromAccount')?.value;
-    const toAccount = this.form.get('toAccount')?.value;
-    const amount = this.form.get('amount')?.value;
+    const fromAccount = this.form.get('fromAccount')?.value as IAccount;
+    const toAccount = this.form.get('toAccount')?.value as IAccount;
+    const amount = this.form.get('amount')?.value as number;
 
-    this.accountService.addTransaction(fromAccount, amount, TransactionType.TRANSFER).subscribe({
+    this.accountService.addTransaction(fromAccount, amount, toAccount.accountId, TransactionType.TRANSFER).subscribe({
       next: (fam) => {
-        this.accountService.addTransaction(toAccount, amount, TransactionType.DEPOSIT).subscribe({
+        this.accountService.addTransaction(toAccount, amount, fromAccount.accountId, TransactionType.DEPOSIT).subscribe({
           next: (tam) => {
             this.customer!.accounts = [fam, tam];
             this.lsCustomer.setCustomer(this.customer!);

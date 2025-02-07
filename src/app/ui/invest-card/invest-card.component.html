@@ -8,7 +8,6 @@
     </h5>
     <h6>ID: {{invest?.investmentId}}</h6>
     <p class="card-text align-middle">{{invest?.balance | currency: 'MXN'}}</p>
-
     <transaction-list [transactions]="invest?.transactions"></transaction-list>
   </div>
 </div>

@@ -20,6 +20,7 @@ export interface IAccount {
 export interface ITransaction {
   transactionId: string;
   accountId: string;
+  fromAccountId: string;
   amount: number;
   transactionDate: Date;
   transactionType: TransactionType;

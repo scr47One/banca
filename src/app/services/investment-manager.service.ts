@@ -10,7 +10,7 @@ export class InvestmentManagerService {
 
   constructor() { }
 
-  public addTransaction(investment: IInvest,  amount: number, transactionType: TransactionType): Observable<IInvest> {
+  public addTransaction(investment: IInvest,  amount: number, fromAccountId: string, transactionType: TransactionType): Observable<IInvest> {
     return new Observable(observer => {
       if(amount <= 0) {
         observer.error('Invalid amount');
@@ -35,6 +35,7 @@ export class InvestmentManagerService {
       investment.transactions.push({
         transactionId: Math.random().toString(36).substring(2, 9),
         accountId: investment.investmentId,
+        fromAccountId,
         amount,
         transactionDate: new Date(),
         transactionType

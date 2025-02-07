@@ -16,7 +16,7 @@ export class AccountsListComponent {
   constructor(private storage: LocalStorageService, private modalService: NgbModal) { }
 
   showDetails(account: IAccount) {
-    const modalRef = this.modalService.open(AccountDetailModalComponent);
+    const modalRef = this.modalService.open(AccountDetailModalComponent, { size: 'xl' });
     modalRef.componentInstance.account = account;
   }
 }

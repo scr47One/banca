@@ -10,7 +10,7 @@ export class AccountManagerService {
 
   constructor() { }
 
-  public addTransaction(account: IAccount, amount: number, transactionType: TransactionType): Observable<IAccount> {
+  public addTransaction(account: IAccount, amount: number, fromAccountId: string, transactionType: TransactionType): Observable<IAccount> {
     return new Observable(observer => {
       if (transactionType === TransactionType.DEPOSIT) {
         account.balance += amount;
@@ -32,6 +32,7 @@ export class AccountManagerService {
       account.transactions.push({
         transactionId: Math.random().toString(36).substring(2, 9),
         accountId: account.accountId,
+        fromAccountId,
         amount: amount,
         transactionDate: new Date(),
         transactionType: transactionType
