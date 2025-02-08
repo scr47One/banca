@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
 import { IAccount, ICustomer } from '../entities/interfaces';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AccountDetailModalComponent } from '../ui/account-detail-modal/account-detail-modal.component';
 
 @Component({
   selector: 'app-accounts-list',
@@ -11,10 +13,10 @@ export class AccountsListComponent {
 
   customer: ICustomer = this.storage.retrieve('customer');
 
-  constructor(private storage: LocalStorageService) { }
-
+  constructor(private storage: LocalStorageService, private modalService: NgbModal) { }
 
   showDetails(account: IAccount) {
-    alert(`Account: ${account.accountName} Balance: ${account.balance}`);
+    const modalRef = this.modalService.open(AccountDetailModalComponent, { size: 'xl' });
+    modalRef.componentInstance.account = account;
   }
 }

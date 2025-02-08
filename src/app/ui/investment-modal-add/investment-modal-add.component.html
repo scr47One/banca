@@ -1,0 +1,55 @@
+<div class="modal-header">
+  <h4 class="modal-title">Operaciones de inversión</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form">
+    <div class="mb-3">
+      <label for="fromAccount" class="form-label">Cuentas corrientes</label>
+      <select class="form-control form-select" formControlName="fromAccount">
+        <option selected>Seleccione una cuenta</option>
+        <option *ngFor="let account of customer?.accounts" [ngValue]="account">
+          {{ account | accountDescriptor }} {{ account.balance | currency: account.currency }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="currency" class="form-label">Moneda de la cuenta de inversión</label>
+      <select class="form-control form-select" formControlName="currency" (change)="onAccountChange()">
+        <option [selected]="true">Seleccione una moneda</option>
+        <option *ngFor="let currency of currencies" [ngValue]="currency.code">
+          {{ currency | currencyDescription }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="toAccount" class="form-label">Nombre de cuenta de inversión</label>
+      <input type="text" class="form-control" formControlName="investName" />
+    </div>
+
+    <div class="mb-3">
+      <label for="toAccount" class="form-label">Plazo de la cuenta de inversión</label>
+      <select class="form-control form-select" formControlName="investRate">
+        <option selected>Seleccione un plazo</option>
+        <option *ngFor="let rate of rates" [ngValue]="rate">
+          {{ rate | rateDescription }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="amount" class="form-label">Importe de la transacción</label>
+      <div class="input-group " id="amount">
+        <span class="input-group-text" >{{  currencyKey  }}</span>
+        <input type="number" class="form-control" formControlName="amount" />
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="submit" class="btn btn-primary" (click)="submitOperation()" [disabled]="form.invalid">Realizar operación</button>
+  <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')">Cerrar</button>
+</div>

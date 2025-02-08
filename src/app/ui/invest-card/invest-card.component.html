@@ -1,0 +1,14 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h5>{{invest?.accountName}}
+      <span class="badge bg-success text-white py-1">
+        {{invest!.investRate | investRate }}
+        <i class="bi bi-graph-up-arrow"></i>
+      </span>
+    </h5>
+    <h6>ID: {{invest?.accountId}}</h6>
+    <p class="card-text align-middle">{{invest?.balance | currency: invest?.currency}}</p>
+    <transaction-list [transactions]="invest?.transactions"></transaction-list>
+  </div>
+</div>
+

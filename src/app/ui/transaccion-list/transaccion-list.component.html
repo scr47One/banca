@@ -1,0 +1,37 @@
+
+<div ngbAccordion>
+  <div ngbAccordionItem>
+      <h2 ngbAccordionHeader>
+          <button ngbAccordionButton> Transacciones </button>
+      </h2>
+      <div ngbAccordionCollapse>
+          <div ngbAccordionBody>
+            <div *ngIf="!transactions || transactions!.length <= 0 then noTransactionList else transactionList"></div>
+            <ng-template #noTransactionList>
+              <p>No hay transacciones</p>
+            </ng-template>
+            <ng-template #transactionList>
+              <ul class="list-group list-group-flush p-0">
+                <li class="list-group-item p-0" *ngFor="let transaction of transactions" >
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <span>{{ transaction.transactionId }}</span>
+                        </div>
+                        <div class="col-sm-auto col-lg-2 fst-italic text-secondary">
+                            <span>{{ transaction.transactionDate | date: 'dd/MM/yy HH:mm a' }}</span>
+                        </div>
+                        <div class="col-sm-auto col-lg-4 text-uppercase">
+                            <span>{{ transaction.transactionType | transactionType }} {{ transaction | transactionDescription }}</span>
+                        </div>
+                        <div class="col fw-bold">
+                            <span>{{ transaction.amount | currency: transaction.currency }}</span>
+                        </div>
+                    </div>
+                </li>
+              </ul>
+            </ng-template>
+          </div>
+      </div>
+  </div>
+</div>
+
