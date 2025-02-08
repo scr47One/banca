@@ -26,7 +26,7 @@
 
     <div class="mb-3">
       <label for="toAccount" class="form-label">Cuenta de inversión</label>
-      <select class="form-control" formControlName="toAccount">
+      <select class="form-control" formControlName="toAccount" (change)="onAccountChange()">
         <option>Seleccione una cuenta de inversión</option>
         <option *ngFor="let invest of customer?.investments" [ngValue]="invest">
           {{ invest | investDescriptor }} {{ invest.balance | currency: invest.currency }} {{invest.investRate | investRate }}
@@ -36,7 +36,10 @@
 
     <div class="mb-3">
       <label for="amount" class="form-label">Importe de la transacción</label>
-      <input type="number" class="form-control" formControlName="amount" />
+      <div class="input-group " id="amount">
+        <span class="input-group-text" >{{  currencyKey  }}</span>
+        <input type="number" class="form-control" formControlName="amount" />
+      </div>
     </div>
   </form>
 </div>

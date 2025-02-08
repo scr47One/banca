@@ -6,7 +6,7 @@
   <form [formGroup]="form">
     <div class="mb-3">
       <label for="fromAccount" class="form-label">Cuentas corrientes</label>
-      <select class="form-control form-select" formControlName="fromAccount" (change)="onAccountChange()">
+      <select class="form-control form-select" formControlName="fromAccount">
         <option selected>Seleccione una cuenta</option>
         <option *ngFor="let account of customer?.accounts" [ngValue]="account">
           {{ account | accountDescriptor }} {{ account.balance | currency: account.currency }}
@@ -16,7 +16,7 @@
 
     <div class="mb-3">
       <label for="currency" class="form-label">Moneda de la cuenta de inversión</label>
-      <select class="form-control form-select" formControlName="currency" >
+      <select class="form-control form-select" formControlName="currency" (change)="onAccountChange()">
         <option [selected]="true">Seleccione una moneda</option>
         <option *ngFor="let currency of currencies" [ngValue]="currency.code">
           {{ currency | currencyDescription }}
@@ -42,7 +42,7 @@
     <div class="mb-3">
       <label for="amount" class="form-label">Importe de la transacción</label>
       <div class="input-group " id="amount">
-        <span class="input-group-text" >{{  accountCurrency  }}</span>
+        <span class="input-group-text" >{{  currencyKey  }}</span>
         <input type="number" class="form-control" formControlName="amount" />
       </div>
     </div>

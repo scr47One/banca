@@ -9,5 +9,9 @@ export class AlertComponent {
   @Input('message') message: string = '';
   @Input('type') type: string = 'info';
 
-  constructor() {}
+  constructor() { }
+
+  getClass() {
+    return `alert alert-${this.type} fade show d-flex h-100`;
+  }
 }

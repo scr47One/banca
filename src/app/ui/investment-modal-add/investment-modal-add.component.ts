@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbAlert, NgbAlertModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TransactionType } from 'src/app/entities/enums';
 import { ICustomer, IAccount, IInvest, ICurrency, IInvestRate } from 'src/app/entities/interfaces';
 import { AccountManagerService } from 'src/app/services/local/account-manager.service';
@@ -23,7 +23,7 @@ export class InvestmentModalAddComponent {
     investment: IInvest = defaultInvestment
     modalRef: NgbModalRef | undefined;
     rates: IInvestRate[] = defaultRates;
-    accountCurrency: string = '.';
+    currencyKey: string = '.';
 
     transactionType = Object.values(TransactionType);
 
@@ -37,7 +37,6 @@ export class InvestmentModalAddComponent {
 
     constructor(
       public activeModal: NgbActiveModal,
-      private modalService: NgbModal,
       private formBuilder: FormBuilder,
       private accountService: AccountManagerService,
       private investService: InvestmentManagerService,
@@ -47,35 +46,33 @@ export class InvestmentModalAddComponent {
     ) { }
 
     onAccountChange() {
-      const account = this.form.get('fromAccount')?.value as IAccount;
-      console.log(account);
-      this.accountCurrency = account.currency;
-      console.log(this.accountCurrency);
+      const currency = this.form.get('currency')?.value as string;
+      this.currencyKey = currency;
     }
 
     submitOperation() {
       const fromAccount = this.form.get('fromAccount')?.value as IAccount;
       const investName = this.form.get('investName')?.value as string;
       const investRate = this.form.get('investRate')?.value as IInvestRate;
-      const fromCurrency = fromAccount.currency;
-      const toCurrency = this.form.get('currency')?.value as string;
+
+      const toCurrency = fromAccount.currency;
+      const fromCurrency = this.form.get('currency')?.value as string;
 
       let amount = this.form.get('amount')?.value as number;
-      let amountConverted = amount;
 
       if (fromCurrency !== toCurrency) {
         this.currencyExchangeService.convertCurrencyAmount( amount, fromCurrency, toCurrency ).subscribe({
           next: (convertedAmount) => {
-            amountConverted = convertedAmount;
-            this.addInvestment(investName, toCurrency, investRate, fromAccount,  amountConverted, amount );
+            this.addInvestment(investName, fromCurrency, investRate, fromAccount,  amount, convertedAmount);
             this.activeModal.dismiss();
           },
           error: (error) => {
-            this.showAlert(error, 'danger');
+            alert(error);
+            this.investment = defaultInvestment;
           }
         });
       } else {
-        this.addInvestment(investName, toCurrency, investRate, fromAccount, amount);
+        this.addInvestment(investName, fromCurrency, investRate, fromAccount, amount);
       }
     }
 
@@ -85,6 +82,7 @@ export class InvestmentModalAddComponent {
       this.investment.investRate = investRate;
       this.customerService.addInvestment(this.customer!, this.investment ).subscribe({
         next: ({customer, investment}) => {
+          this.localStorageCustomer.setCustomer(customer);
           this.customer = customer;
           this.addTransaction(investment, fromAccount, amount, amountAfterExchange || amount);
         },
@@ -104,7 +102,7 @@ export class InvestmentModalAddComponent {
               this.activeModal.dismiss();
             },
             error: (error) => {
-              this.showAlert(error, 'danger');
+              alert(error);
             }
           });
         },
@@ -118,12 +116,7 @@ export class InvestmentModalAddComponent {
       this.customer!.accounts[this.customer!.accounts.findIndex(i => i.accountId === account.accountId)] = account;
       this.customer!.investments[this.customer!.investments.findIndex(i => i.accountId === invest.accountId)] = invest;
       this.localStorageCustomer.setCustomer(this.customer!);
-      this.showAlert('Operación realizada con éxito', 'success');
-    }
-
-    showAlert(message: string, type: string) {
-      this.modalRef = this.modalService.open(AlertComponent)
-      this.modalRef.componentInstance!.message = message;
-      this.modalRef.componentInstance!.type = type;
+      this.customer = this.localStorageCustomer.getCustomer();
+      alert('Investment added successfully');
     }
 }

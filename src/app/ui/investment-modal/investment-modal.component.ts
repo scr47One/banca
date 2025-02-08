@@ -26,6 +26,8 @@ export class InvestmentModalComponent {
     amount: [undefined, Validators.required]
   });
 
+  currencyKey: string = '.';
+
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
@@ -34,6 +36,11 @@ export class InvestmentModalComponent {
     private currencyExchangeService: CurrencyExchangeManagerService,
     private accountService: AccountManagerService) { }
 
+  onAccountChange() {
+    const currency = this.form.get('toAccount')?.value as IAccount;
+    this.currencyKey = currency.currency;
+  }
+
   submitOperation() {
     const fromAccount = this.form.get('fromAccount')?.value as IAccount;
     const toAccount = this.form.get('toAccount')?.value as IInvest;
@@ -41,16 +48,13 @@ export class InvestmentModalComponent {
     const operationType = this.form.get('operationType')?.value as TransactionType;
     const operationTypeAccount = operationType === TransactionType.DEPOSIT ? TransactionType.WITHDRAW : TransactionType.DEPOSIT;
 
-    const fromCurrency = fromAccount.currency;
-    const toCurrency = toAccount.currency;
-
-    let amountConverted = amount;
+    const toCurrency = fromAccount.currency;
+    const fromCurrency = toAccount.currency;
 
     if (fromCurrency !== toCurrency) {
       this.currencyExchangeService.convertCurrencyAmount( amount, fromCurrency, toCurrency ).subscribe({
         next: (convertedAmount) => {
-          amountConverted = convertedAmount;
-          this.addTransaction(toAccount, fromAccount, operationType, operationTypeAccount, amount, amountConverted);
+          this.addTransaction(toAccount, fromAccount, operationType, operationTypeAccount, convertedAmount, amount);
           this.activeModal.dismiss();
         },
         error: (error) => {

@@ -6,7 +6,7 @@ import { TransaccionListComponent } from './transaccion-list/transaccion-list.co
 import { TransactionModalComponent } from './transaction-modal/transaction-modal.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgbAccordionModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { InvestCardComponent } from './invest-card/invest-card.component';
 import { CustomerDataComponent } from './customer-data/customer-data.component';
 import { InvestmentModalComponent } from './investment-modal/investment-modal.component';
@@ -33,7 +33,6 @@ import { AlertComponent } from './alert/alert.component';
     ReactiveFormsModule,
     FormsModule,
     NgbAccordionModule,
-    NgbAlertModule
   ],
   exports: [
     AccountCardComponent,
