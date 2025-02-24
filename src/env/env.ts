@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   fastforex: {
-    apiKey: '677eecec8a-f8ac45c362-sraa65',
+    apiKey: 'b2ca25c017-e344069ab1-ss7aa7',
     apiUrl: 'https://api.fastforex.io'
   }
 };
