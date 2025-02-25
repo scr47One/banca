@@ -1,12 +1,15 @@
 {
   "name": "banca",
   "version": "0.0.0",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "for script in ./test/*.py; do python3 \"$script\"; done"
   },
   "private": true,
   "dependencies": {

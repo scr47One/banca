@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
 import Customer from 'src/assets/json/customer.json';
 import { CurrencyExchangeManagerService } from './services/local/currency-exchange-manager.service';
-import { ICurrency } from './entities/interfaces';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'BANCA POR INTERNET';
   customer = Customer;
+  title = 'BANCA POR INTERNET';
   isMenuCollapsed = true;
   constructor(
     private storage: LocalStorageService,

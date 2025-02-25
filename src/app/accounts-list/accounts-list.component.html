@@ -1,9 +1,9 @@
-<h1>Hola {{ customer.name}}</h1>
+<h1>Hola {{customer.name}}</h1>
 <p>{{ customer | customerName }}</p>
 <div class="accounts">
   <div class="balance-sum">
     <span>Saldo total en cuentas</span>
-    <!-- Cambiar el balance de cuentas -->
+    <!-- TODO: Cambiar el balance de cuentas -->
     <span class="balance">{{ customer.accounts | accountsBalance | currency}}</span>
   </div>
   <account-card class="account-card" *ngFor="let account of customer.accounts" [account]="account"
