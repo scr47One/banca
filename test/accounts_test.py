@@ -4,6 +4,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webdriver import WebDriver
 import re
 
+RED = '\033[31m'
+GREEN = '\033[32m'
+RESET = '\033[0m' 
+
 class Accounts:
     def __init__(self, driver: WebDriver):
         self.driver = driver
@@ -13,22 +17,23 @@ class Accounts:
         self.accounts = (By.CLASS_NAME, 'accounts')
 
     def check_greeting(self, expected_greeting: str):
-        print("Checking greeting")
         greeting = self.wait.until(EC.visibility_of_element_located(self.greeting))
         greeting_text = greeting.text
         pattern = r"^Hola [A-Za-záéíóúñÑ]+$"
-        assert re.match(pattern, greeting_text), f"No se muestra el saludo esperado. Se esperaba {expected_greeting} y se obtuvo {greeting_text}"
+        assert re.match(pattern, greeting_text), f"{RED}No se muestra el saludo esperado. Se esperaba {expected_greeting} y se obtuvo {greeting_text} ✗{RESET}"
+        print(f"{GREEN}Greeting is correct ✓{RESET}")
+        return self
 
     def check_username(self, expected_username: str):
-        print("Checking username")
         username = self.wait.until(EC.visibility_of_element_located(self.username))
-        assert username.text == expected_username, f"No se muestra el nombre de usuario esperado. Se esperaba {expected_username} y se obtuvo {username.text}"
+        assert username.text == expected_username, f"{RED}No se muestra el nombre de usuario esperado. Se esperaba {expected_username} y se obtuvo {username.text} ✗{RESET}"
+        print(f"{GREEN}Username is correct ✓{RESET}")
         return self
     
     def check_accounts(self):
-        print("Checking accounts")
         accounts = self.wait.until(EC.visibility_of_element_located(self.accounts))
-        assert accounts.is_displayed(), "Accounts section is not displayed"
+        assert accounts.is_displayed(), f"{RED}Accounts section is not displayed ✗{RESET}"
+        print(f"{GREEN}Accounts section is displayed ✓{RESET}")
         return self
     
 
