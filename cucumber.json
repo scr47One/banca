@@ -3,15 +3,5 @@
         "formatOptions": {
             "snippetInterface": "synchronous"
         }
-    },
-    "require": [
-        "features/step_definitions/*.ts"
-    ],
-    "require-module": [
-        "ts-node/register"
-    ],
-    "format": [
-        "progress-bar",
-        "node_modules/cucumber-pretty"
-    ]
+    }
 }
